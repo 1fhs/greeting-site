@@ -1,326 +1,169 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>تهنئة خاصة</title>
-  <meta name="description" content="موقع تهنئة احترافي يعرض رسالة باسم الشخص." />
-  <style>
-    :root {
-      --bg-1: #0f172a;
-      --bg-2: #1e293b;
-      --card: rgba(255, 255, 255, 0.12);
-      --card-border: rgba(255, 255, 255, 0.18);
-      --text: #f8fafc;
-      --muted: #cbd5e1;
-      --accent: #22c55e;
-      --accent-2: #38bdf8;
-      --danger: #fb7185;
-      --shadow: 0 20px 60px rgba(15, 23, 42, 0.45);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Tahoma", "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top right, rgba(56, 189, 248, 0.25), transparent 25%),
-        radial-gradient(circle at bottom left, rgba(34, 197, 94, 0.20), transparent 28%),
-        linear-gradient(135deg, var(--bg-1), var(--bg-2));
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      overflow-x: hidden;
-    }
-    .glow {
-      position: fixed;
-      width: 360px;
-      height: 360px;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.35;
-      pointer-events: none;
-      z-index: 0;
-      animation: float 8s ease-in-out infinite;
-    }
-    .glow.one { top: -70px; right: -60px; background: #38bdf8; }
-    .glow.two { bottom: -100px; left: -80px; background: #22c55e; animation-delay: -3s; }
-    @keyframes float {
-      0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-      50% { transform: translateY(18px) translateX(10px) scale(1.05); }
-    }
-    .card {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 760px;
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-      border-radius: 28px;
-      overflow: hidden;
-    }
-    .hero {
-      padding: 34px 28px 18px;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 18px;
-    }
-    h1 {
-      margin: 0 0 10px;
-      font-size: clamp(28px, 4vw, 46px);
-      line-height: 1.2;
-    }
-    .hero p {
-      margin: 0 auto;
-      max-width: 580px;
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 16px;
-    }
-    .content {
-      padding: 28px;
-      display: grid;
-      gap: 22px;
-    }
-    .input-wrap {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-    }
-    input {
-      width: 100%;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(15, 23, 42, 0.32);
-      color: var(--text);
-      border-radius: 16px;
-      padding: 18px 16px;
-      font-size: 18px;
-      outline: none;
-      transition: 0.25s ease;
-    }
-    input::placeholder { color: #94a3b8; }
-    input:focus {
-      border-color: rgba(56, 189, 248, 0.65);
-      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15);
-      transform: translateY(-1px);
-    }
-    button {
-      min-width: 170px;
-      border: none;
-      border-radius: 16px;
-      padding: 0 22px;
-      font-size: 17px;
-      font-weight: 700;
-      color: #fff;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 14px 30px rgba(34, 197, 94, 0.25);
-      transition: transform 0.2s ease, box-shadow 0.25s ease, filter 0.25s ease;
-    }
-    button:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.03);
-      box-shadow: 0 16px 34px rgba(56, 189, 248, 0.28);
-    }
-    button:active { transform: translateY(0); }
-    .result {
-      min-height: 210px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background:
-        linear-gradient(160deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
-        rgba(15, 23, 42, 0.22);
-      padding: 26px;
-      display: grid;
-      align-content: center;
-      justify-items: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .result::before,
-    .result::after {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      filter: blur(55px);
-      opacity: 0.22;
-      pointer-events: none;
-    }
-    .result::before { top: -40px; right: -40px; background: #38bdf8; }
-    .result::after { bottom: -50px; left: -30px; background: #22c55e; }
-    .result small {
-      display: inline-block;
-      color: #a5f3fc;
-      margin-bottom: 10px;
-      letter-spacing: 0.5px;
-      font-size: 14px;
-    }
-    .message {
-      position: relative;
-      z-index: 1;
-      margin: 0;
-      font-size: clamp(22px, 3vw, 34px);
-      line-height: 1.7;
-      font-weight: 700;
-    }
-    .sub-message {
-      position: relative;
-      z-index: 1;
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.9;
-      max-width: 560px;
-    }
-    .empty {
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.9;
-      max-width: 480px;
-    }
-    .highlight {
-      color: #fde68a;
-      text-shadow: 0 0 18px rgba(253, 224, 71, 0.18);
-    }
-    .footer-note {
-      text-align: center;
-      color: #cbd5e1;
-      font-size: 13px;
-      opacity: 0.9;
-    }
-    .shake {
-      animation: shake 0.35s linear;
-    }
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(6px); }
-      75% { transform: translateX(-6px); }
-    }
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 18px;
-      top: -30px;
-      opacity: 0.9;
-      animation: fall 3.8s linear forwards;
-      border-radius: 4px;
-    }
-    @keyframes fall {
-      to {
-        transform: translateY(360px) rotate(560deg);
-        opacity: 0;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تهنئة عيد الفطر المبارك</title>
+    <meta name="description" content="تهنئة احترافية بمناسبة عيد الفطر المبارك موجهة للمهندس أحمد عبد الجبار يحي" />
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p8f3W+Jhk+BT3cY2pK6G/nPktF2LXvRV5iTs8mBd7iCQfqq9eIyxYx4jMgqVk5WYhIOKk9YtVHIpi/k2v48vYw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      :root {
+        --bg1: #0e2231;
+        --bg2: #173a4f;
+        --card-bg: rgba(255, 255, 255, 0.12);
+        --card-border: rgba(255, 255, 255, 0.18);
+        --text: #eef4f9;
+        --muted: #b6c8d6;
+        --accent1: #22c55e;
+        --accent2: #38bdf8;
+        --warning: #fcd34d;
       }
-    }
-    @media (max-width: 700px) {
-      .card { border-radius: 22px; }
-      .hero, .content { padding: 22px; }
-      .input-wrap { grid-template-columns: 1fr; }
-      button { min-height: 56px; }
-      .result { min-height: 260px; }
-    }
-  </style>
-</head>
-<body>
-  <div class="glow one"></div>
-  <div class="glow two"></div>
 
-  <main class="card">
-    <section class="hero">
-      <div class="badge">✨ صفحة تهنئة تفاعلية واحترافية</div>
-      <h1>اكتب الاسم، ودع التهنئة تتألق</h1>
-      <p>
-        أدخل اسم الشخص ثم اضغط على الزر لتظهر له رسالة أنيقة وراقية تصلح للمشاركة في المناسبات والنجاحات والتهاني الخاصة.
-      </p>
-    </section>
+      * {
+        box-sizing: border-box;
+      }
 
-    <section class="content">
-      <div class="input-wrap">
-        <input id="nameInput" type="text" placeholder="مثال: أحمد" autocomplete="off" />
-        <button id="greetButton" type="button">عرض التهنئة</button>
-      </div>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Tahoma", "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, var(--bg1), var(--bg2));
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        overflow-x: hidden;
+      }
 
-      <div class="result" id="resultBox">
-        <div id="defaultState" class="empty">
-          🌷 عند إدخال الاسم سيظهر هنا نص تهنئة احترافي باسم الشخص.
+      .card {
+        position: relative;
+        width: 100%;
+        max-width: 700px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 24px;
+        backdrop-filter: blur(16px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+      }
+
+      .header {
+        text-align: center;
+        padding: 2rem 1.5rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+      }
+
+      .header .icon {
+        font-size: 4rem;
+        color: var(--warning);
+        margin-bottom: 1rem;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 2.2rem;
+        line-height: 1.3;
+      }
+
+      .header h2 {
+        margin: 0.5rem 0 0;
+        font-size: 1.4rem;
+        color: var(--muted);
+      }
+
+      .content {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .message {
+        font-size: 1.5rem;
+        line-height: 1.6;
+        text-align: center;
+      }
+
+      .details {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .icons-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+
+      .icons-row .fa {
+        font-size: 2.5rem;
+        color: var(--accent2);
+      }
+
+      .audio-control {
+        text-align: center;
+        margin-top: 1.5rem;
+      }
+
+      audio {
+        width: 100%;
+        max-width: 400px;
+      }
+      
+      @media (max-width: 540px) {
+        .header h1 {
+          font-size: 1.7rem;
+        }
+        .header h2 {
+          font-size: 1.1rem;
+        }
+        .message {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <div class="icon">
+          <i class="fa-solid fa-moon"></i>
         </div>
-
-        <div id="greetingState" style="display:none;">
-          <small>رسالة مخصصة</small>
-          <p class="message" id="greetingText"></p>
-          <p class="sub-message" id="subGreetingText"></p>
-        </div>
+        <h1>عيد فطر مبارك</h1>
+        <h2>للأخ العزيز المهندس أحمد عبد الجبار يحي</h2>
       </div>
-
-    </section>
-  </main>
-
-  <script>
-    const input = document.getElementById('nameInput');
-    const button = document.getElementById('greetButton');
-    const greetingText = document.getElementById('greetingText');
-    const subGreetingText = document.getElementById('subGreetingText');
-    const defaultState = document.getElementById('defaultState');
-    const greetingState = document.getElementById('greetingState');
-    const resultBox = document.getElementById('resultBox');
-
-    function createConfetti() {
-      const colors = ['#22c55e', '#38bdf8', '#fde68a', '#fb7185', '#c084fc'];
-      for (let i = 0; i < 24; i++) {
-        const piece = document.createElement('span');
-        piece.className = 'confetti';
-        piece.style.right = Math.random() * 100 + '%';
-        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-        piece.style.animationDuration = (2.5 + Math.random() * 1.8) + 's';
-        piece.style.transform = `translateY(0) rotate(${Math.random() * 120}deg)`;
-        resultBox.appendChild(piece);
-        setTimeout(() => piece.remove(), 4200);
-      }
-    }
-
-    function showGreeting() {
-      const name = input.value.trim();
-
-      if (!name) {
-        greetingState.style.display = 'none';
-        defaultState.textContent = 'الرجاء إدخال الاسم   .';
-        defaultState.style.display = 'block';
-        resultBox.classList.remove('shake');
-        void resultBox.offsetWidth;
-        resultBox.classList.add('shake');
-        input.focus();
-        return;
-      }
-
-      greetingText.innerHTML = `ألف مبروك <span class="highlight">${name}</span>!`;
-      subGreetingText.textContent = `نتمنى لك أيامًا مليئة بالفرح والإنجاز والتوفيق، وأن تبقى النجاحات رفيقة دربك في كل خطوة قادمة.`;
-
-      defaultState.style.display = 'none';
-      greetingState.style.display = 'block';
-      createConfetti();
-    }
-
-    button.addEventListener('click', showGreeting);
-    input.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') showGreeting();
-    });
-  </script>
-</body>
+      <div class="content">
+        <div class="message">
+          ألف مبروك يا&nbsp;<span style="color: var(--warning); font-weight: bold;">المهندس أحمد</span>،<br />
+          تقبل الله صيامكم وقيامكم وجعل أيامكم كلها فرحاً وسعادة.
+        </div>
+        <div class="details">
+          مع انطلاق مدفع العيد وصدح تكبيرات العيد من المآذن، نبارك لكم حلول عيد الفطر المبارك،
+          ونسأل الله أن يعيده عليكم بالصحة والعافية والخير الوفير.<br />
+          كل عام وأنتم بألف خير.
+        </div>
+        <div class="icons-row">
+          <i class="fa-solid fa-cannon" aria-label="Cannon icon"></i>
+          <i class="fa-solid fa-mosque" aria-label="Mosque icon"></i>
+          <i class="fa-solid fa-sun" aria-label="Sun icon"></i>
+        </div>
+        <!-- Optional audio for Eid takbeer: uncomment if needed -->
+        
+        <div class="audio-control">
+          <audio controls>
+            <source src="https://dn711103.ca.archive.org/0/items/EidTakbirBySheikhAliMullah/EidTakbirBySheikhAliMullah.mp3" type="audio/mpeg" />
+            متصفحك لا يدعم تشغيل الصوت.
+          </audio>
+        </div>
+        
+      </div>
+    </div>
+  </body>
 </html>
