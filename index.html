@@ -175,4 +175,82 @@
       });
     </script>
   </body>
+      </html>        flex-direction: column;
+      }
+      .input-group input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text);
+        border-radius: 12px;
+        outline: none;
+      }
+      .input-group input:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+      }
+      .input-group button {
+        margin-top: 1rem;
+        padding: 0.8rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, var(--gold), var(--purple));
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .input-group button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(212, 175, 55, 0.35);
+      }
+      .input-group button:active {
+        transform: translateY(0);
+      }
+
+      .note {
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        color: var(--accent-light);
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="decorations">
+      <i class="fa-solid fa-star star1"></i>
+      <i class="fa-solid fa-star star2"></i>
+      <i class="fa-solid fa-star star3"></i>
+      <i class="fa-solid fa-star star4"></i>
+      <i class="fa-solid fa-moon moon"></i>
+    </div>
+    <div class="card">
+      <h1>تهنئة عيد الفطر المبارك</h1>
+      <p>أدخل اسمك لتلقي رسالة تهنئة فاخرة مخصصة لك</p>
+      <div class="input-group">
+        <input id="nameInput" type="text" placeholder="اكتب اسمك" autocomplete="off" />
+        <button id="submitBtn" type="button">عرض التهنئة</button>
+      </div>
+      <div class="note">* سيظهر اسمك في التهنئة الرسمية للعيد.</div>
+    </div>
+    <script>
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.addEventListener('click', function () {
+        const name = document.getElementById('nameInput').value.trim();
+        if (!name) {
+          alert('يرجى إدخال اسمك أولاً.');
+          return;
+        }
+        // Navigate to greeting page with encoded name parameter
+        window.location.href = 'greeting.html?name=' + encodeURIComponent(name);
+      });
+      // allow Enter key to submit
+      document.getElementById('nameInput').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') submitBtn.click();
+      });
+    </script>
+  </body>
 </html>
