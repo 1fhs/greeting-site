@@ -4,100 +4,169 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>تهنئة عيد الفطر المبارك</title>
-    <meta name="description" content="موقع فاخر للتهنئة بعيد الفطر المبارك مع إدخال الاسم للتهنئة الشخصية." />
-    <!-- Import Google Fonts for Arabic typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Amiri:wght@700&display=swap" rel="stylesheet" />
+    <meta name="description" content="تهنئة احترافية بمناسبة عيد الفطر المبارك موجهة للمهندس أحمد عبد الجبار يحي" />
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p8f3W+Jhk+BT3cY2pK6G/nPktF2LXvRV5iTs8mBd7iCQfqq9eIyxYx4jMgqVk5WYhIOKk9YtVHIpi/k2v48vYw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
       :root {
-        --gold: #d4af37;
-        --purple: #4a235a;
-        --dark: #0f0f0f;
-        --text: #ffffff;
-        --accent-light: #e5c97d;
+        --bg1: #0e2231;
+        --bg2: #173a4f;
+        --card-bg: rgba(255, 255, 255, 0.12);
+        --card-border: rgba(255, 255, 255, 0.18);
+        --text: #eef4f9;
+        --muted: #b6c8d6;
+        --accent1: #22c55e;
+        --accent2: #38bdf8;
+        --warning: #fcd34d;
       }
 
       * {
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
       }
 
       body {
-        font-family: 'Cairo', sans-serif;
-        background: linear-gradient(135deg, var(--dark), #1a1423);
-        color: var(--text);
+        margin: 0;
         min-height: 100vh;
-        overflow: hidden;
+        font-family: "Tahoma", "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, var(--bg1), var(--bg2));
+        color: var(--text);
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 1.5rem;
-      }
-
-      /* Floating decorative icons */
-      .decorations {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        pointer-events: none;
-        z-index: 0;
-      }
-      .decorations i {
-        position: absolute;
-        font-size: 2rem;
-        color: var(--accent-light);
-        opacity: 0.8;
-        animation: float 20s linear infinite;
-      }
-      /* Random positions and durations for stars and moon */
-      .decorations .star1 { top: 10%; left: 5%; font-size: 1.2rem; animation-duration: 18s; }
-      .decorations .star2 { top: 25%; left: 40%; font-size: 1.6rem; animation-duration: 22s; }
-      .decorations .star3 { top: 60%; left: 70%; font-size: 1.3rem; animation-duration: 26s; }
-      .decorations .star4 { top: 80%; left: 15%; font-size: 1rem; animation-duration: 19s; }
-      .decorations .moon { top: 35%; left: 80%; font-size: 3rem; color: var(--gold); animation-duration: 28s; }
-      @keyframes float {
-        0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
-        50% { opacity: 0.7; }
-        100% { transform: translateY(-50vh) rotate(360deg); opacity: 0.9; }
+        overflow-x: hidden;
       }
 
       .card {
         position: relative;
-        z-index: 1;
-        background: rgba(74, 35, 90, 0.8);
-        border: 1px solid rgba(212, 175, 55, 0.3);
-        border-radius: 24px;
-        padding: 2.5rem 2rem;
-        max-width: 480px;
         width: 100%;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(8px);
+        max-width: 700px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 24px;
+        backdrop-filter: blur(16px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
       }
 
-      .card h1 {
-        font-family: 'Amiri', serif;
-        font-size: 2.2rem;
+      .header {
+        text-align: center;
+        padding: 2rem 1.5rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+      }
+
+      .header .icon {
+        font-size: 4rem;
+        color: var(--warning);
         margin-bottom: 1rem;
-        color: var(--gold);
-        text-align: center;
       }
 
-      .card p {
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-        text-align: center;
-        color: var(--accent-light);
+      .header h1 {
+        margin: 0;
+        font-size: 2.2rem;
+        line-height: 1.3;
       }
 
-      .input-group {
+      .header h2 {
+        margin: 0.5rem 0 0;
+        font-size: 1.4rem;
+        color: var(--muted);
+      }
+
+      .content {
+        padding: 1.5rem;
         display: flex;
-        gap: 0.5rem;
         flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .message {
+        font-size: 1.5rem;
+        line-height: 1.6;
+        text-align: center;
+      }
+
+      .details {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .icons-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+
+      .icons-row .fa {
+        font-size: 2.5rem;
+        color: var(--accent2);
+      }
+
+      .audio-control {
+        text-align: center;
+        margin-top: 1.5rem;
+      }
+
+      audio {
+        width: 100%;
+        max-width: 400px;
+      }
+      
+      @media (max-width: 540px) {
+        .header h1 {
+          font-size: 1.7rem;
+        }
+        .header h2 {
+          font-size: 1.1rem;
+        }
+        .message {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <div class="icon">
+          <i class="fa-solid fa-moon"></i>
+        </div>
+        <h1>عيد فطر مبارك</h1>
+        <h2>للأخ العزيز المهندس أحمد عبد الجبار يحي</h2>
+      </div>
+      <div class="content">
+        <div class="message">
+          ألف مبروك يا&nbsp;<span style="color: var(--warning); font-weight: bold;">المهندس أحمد</span>،<br />
+          تقبل الله صيامكم وقيامكم وجعل أيامكم كلها فرحاً وسعادة.
+        </div>
+        <div class="details">
+          مع انطلاق مدفع العيد وصدح تكبيرات العيد من المآذن، نبارك لكم حلول عيد الفطر المبارك،
+          ونسأل الله أن يعيده عليكم بالصحة والعافية والخير الوفير.<br />
+          كل عام وأنتم بألف خير.
+        </div>
+        <div class="icons-row">
+          <i class="fa-solid fa-cannon" aria-label="Cannon icon"></i>
+          <i class="fa-solid fa-mosque" aria-label="Mosque icon"></i>
+          <i class="fa-solid fa-sun" aria-label="Sun icon"></i>
+        </div>
+        <!-- Optional audio for Eid takbeer: uncomment if needed -->
+        <!--
+        <div class="audio-control">
+          <audio controls>
+            <source src="https://dn711103.ca.archive.org/0/items/EidTakbirBySheikhAliMullah/EidTakbirBySheikhAliMullah.mp3" type="audio/mpeg" />
+            متصفحك لا يدعم تشغيل الصوت.
+          </audio>
+        </div>
+        -->
+      </div>
+    </div>
+  </body>
+</html>        flex-direction: column;
       }
       .input-group input {
         width: 100%;
